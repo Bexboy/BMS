@@ -1,1 +1,3254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>BEX Mods Store — Discover. Download. Explore.</title>
+
+    <meta
+        name="description"
+        content="BEX Mods Store makes discovering and sharing Android apps fast, simple, and free."
+    >
+
+    <meta name="theme-color" content="#052e16">
+
+    <!-- BMS LOGO -->
+    <link
+        rel="icon"
+        type="image/png"
+        href="https://raw.githubusercontent.com/Bexboy/BMS/main/Untitled%20-%2030%20July%202026%20at%2021.53.38.png"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           GLOBAL
+        ====================================================== */
+
+        :root {
+            --bg: #020b06;
+            --bg-2: #04150b;
+            --bg-3: #052e16;
+
+            --glass: rgba(255, 255, 255, 0.045);
+            --glass-strong: rgba(255, 255, 255, 0.075);
+
+            --glass-border: rgba(134, 239, 172, 0.12);
+
+            --accent: #22c55e;
+            --accent-light: #4ade80;
+            --accent-bright: #86efac;
+
+            --text: #ecfdf5;
+            --text-soft: #b7d8c3;
+            --text-muted: #759584;
+
+            --radius: 22px;
+
+            --max-width: 1180px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 50% -20%,
+                    rgba(34, 197, 94, 0.16),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    180deg,
+                    #020b06 0%,
+                    #031209 45%,
+                    #020b06 100%
+                );
+
+            color: var(--text);
+
+            font-family: "Inter", sans-serif;
+
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        ::selection {
+            background: rgba(34, 197, 94, 0.35);
+            color: white;
+        }
+
+
+        /* =====================================================
+           CUSTOM SCROLLBAR
+        ====================================================== */
+
+        html {
+            scrollbar-width: thin;
+            scrollbar-color:
+                rgba(74, 222, 128, 0.65)
+                rgba(255, 255, 255, 0.035);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background:
+                rgba(255, 255, 255, 0.025);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(134, 239, 172, 0.85),
+                    rgba(34, 197, 94, 0.65)
+                );
+
+            border-radius: 999px;
+
+            border:
+                2px solid
+                rgba(2, 11, 6, 0.7);
+
+            box-shadow:
+                0 0 12px
+                rgba(34, 197, 94, 0.35);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background:
+                linear-gradient(
+                    180deg,
+                    #86efac,
+                    #22c55e
+                );
+
+            box-shadow:
+                0 0 18px
+                rgba(74, 222, 128, 0.65);
+        }
+
+
+        /* =====================================================
+           PARTICLE BACKGROUND
+        ====================================================== */
+
+        #particles {
+            position: fixed;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: -5;
+
+            pointer-events: none;
+        }
+
+        .background-glow {
+            position: fixed;
+
+            width: 600px;
+            height: 600px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(34, 197, 94, 0.07);
+
+            filter: blur(120px);
+
+            pointer-events: none;
+
+            z-index: -4;
+
+            top: -250px;
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+        }
+
+
+        /* =====================================================
+           CURSOR GLOW
+        ====================================================== */
+
+        .cursor-glow {
+            position: fixed;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(74, 222, 128, 0.12),
+                    transparent 68%
+                );
+
+            pointer-events: none;
+
+            z-index: 9999;
+
+            transform:
+                translate(-50%, -50%);
+
+            transition:
+                left 0.08s linear,
+                top 0.08s linear;
+
+            mix-blend-mode: screen;
+        }
+
+
+        /* =====================================================
+           PREMIUM SCROLL PROGRESS
+        ====================================================== */
+
+        .progress {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 0%;
+            height: 2px;
+
+            z-index: 10000;
+
+            pointer-events: none;
+
+            border-radius:
+                0 999px 999px 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #22c55e 0%,
+                    #4ade80 55%,
+                    #bbf7d0 100%
+                );
+
+            box-shadow:
+                0 0 6px
+                rgba(34, 197, 94, 0.65),
+
+                0 0 16px
+                rgba(34, 197, 94, 0.35);
+
+            transform-origin:
+                left center;
+
+            transition:
+                width 0.08s linear;
+        }
+
+        .progress::after {
+            content: "";
+
+            position: absolute;
+
+            right: -2px;
+            top: 50%;
+
+            width: 5px;
+            height: 5px;
+
+            transform:
+                translateY(-50%);
+
+            border-radius: 50%;
+
+            background:
+                #bbf7d0;
+
+            box-shadow:
+                0 0 8px
+                rgba(134, 239, 172, 0.95),
+
+                0 0 16px
+                rgba(34, 197, 94, 0.7);
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ====================================================== */
+
+        .navbar {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            z-index: 5000;
+
+            background:
+                rgba(2, 11, 6, 0.72);
+
+            backdrop-filter:
+                blur(22px);
+
+            -webkit-backdrop-filter:
+                blur(22px);
+
+            border-bottom:
+                1px solid
+                rgba(134, 239, 172, 0.08);
+        }
+
+        .nav-container {
+            position: relative;
+
+            width:
+                min(
+                    var(--max-width),
+                    calc(100% - 40px)
+                );
+
+            height: 76px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+
+        /* =====================================================
+           CENTER BRAND
+        ====================================================== */
+
+        .brand {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 11px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-weight: 700;
+
+            letter-spacing:
+                -0.03em;
+
+            white-space:
+                nowrap;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .brand:hover {
+            transform:
+                translate(-50%, -50%)
+                scale(1.02);
+        }
+
+        .brand-logo {
+            width: 37px;
+            height: 37px;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 0 0 1px
+                rgba(255,255,255,0.08),
+
+                0 8px 30px
+                rgba(34, 197, 94, 0.22);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .brand:hover .brand-logo {
+            transform:
+                scale(1.07)
+                rotate(-2deg);
+
+            box-shadow:
+                0 0 0 1px
+                rgba(134,239,172,0.22),
+
+                0 10px 35px
+                rgba(34,197,94,0.3);
+        }
+
+        .brand-text {
+            font-size: 17px;
+        }
+
+        .brand-text span {
+            color:
+                var(--accent-light);
+        }
+
+
+        /* =====================================================
+           NAV LINKS
+        ====================================================== */
+
+        .nav-links {
+            margin-left: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+        .nav-links a {
+            position: relative;
+
+            padding: 9px 13px;
+
+            color:
+                var(--text-soft);
+
+            font-size: 14px;
+
+            font-weight: 500;
+
+            border-radius: 10px;
+
+            transition:
+                color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+
+            background:
+                rgba(255,255,255,0.045);
+        }
+
+        .nav-links .github-link {
+            color:
+                var(--accent-light);
+        }
+
+
+        /* =====================================================
+           MOBILE TOGGLE
+        ====================================================== */
+
+        .mobile-toggle {
+            display: none;
+
+            margin-left: auto;
+
+            width: 42px;
+            height: 42px;
+
+            border:
+                1px solid
+                var(--glass-border);
+
+            border-radius: 12px;
+
+            background:
+                var(--glass);
+
+            color: white;
+
+            cursor: pointer;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =====================================================
+           HERO
+        ====================================================== */
+
+        .hero {
+            position: relative;
+
+            min-height: 100vh;
+
+            width:
+                min(
+                    var(--max-width),
+                    calc(100% - 40px)
+                );
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+
+            margin: auto;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                8px 13px;
+
+            border:
+                1px solid
+                rgba(134,239,172,0.15);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(34,197,94,0.055);
+
+            color:
+                var(--accent-bright);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing:
+                0.12em;
+
+            margin-bottom:
+                27px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                var(--accent);
+
+            box-shadow:
+                0 0 12px
+                rgba(34,197,94,0.9);
+
+            animation:
+                pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.72);
+            }
+        }
+
+
+        /* =====================================================
+           HERO LOGO
+        ====================================================== */
+
+        .hero-logo {
+            width: 112px;
+            height: 112px;
+
+            object-fit: cover;
+
+            display: block;
+
+            border-radius: 28px;
+
+            margin:
+                0 auto 27px;
+
+            box-shadow:
+                0 0 0 1px
+                rgba(255,255,255,0.08),
+
+                0 25px 80px
+                rgba(34,197,94,0.22);
+
+            animation:
+                logoFloat 5s ease-in-out infinite;
+
+            transition:
+                transform 0.4s ease;
+        }
+
+        .hero-logo:hover {
+            transform:
+                scale(1.06)
+                rotate(-2deg);
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-8px);
+            }
+        }
+
+
+        /* =====================================================
+           HERO TEXT
+        ====================================================== */
+
+        .hero h1 {
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    52px,
+                    8vw,
+                    96px
+                );
+
+            line-height:
+                0.98;
+
+            letter-spacing:
+                -0.065em;
+
+            margin-bottom:
+                27px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 10%,
+                    #d8fce5 42%,
+                    #4ade80 100%
+                );
+
+            -webkit-background-clip:
+                text;
+
+            background-clip:
+                text;
+
+            color:
+                transparent;
+        }
+
+        .hero h1 span {
+            display:
+                block;
+        }
+
+        .hero-description {
+            max-width:
+                650px;
+
+            margin:
+                auto;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                17px;
+
+            line-height:
+                1.75;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ====================================================== */
+
+        .hero-actions {
+            display: flex;
+
+            justify-content:
+                center;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            margin-top:
+                36px;
+
+            flex-wrap:
+                wrap;
+        }
+
+        .btn {
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                9px;
+
+            min-height:
+                48px;
+
+            padding:
+                0 20px;
+
+            border-radius:
+                13px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .btn-primary {
+            color:
+                #021108;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4ade80,
+                    #22c55e
+                );
+
+            box-shadow:
+                0 12px 40px
+                rgba(34,197,94,0.22);
+        }
+
+        .btn-primary:hover {
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 17px 55px
+                rgba(34,197,94,0.34);
+        }
+
+        .btn-secondary {
+            color:
+                var(--text);
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(134,239,172,0.12);
+        }
+
+        .btn-secondary:hover {
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(255,255,255,0.075);
+
+            border-color:
+                rgba(134,239,172,0.24);
+        }
+
+        .hero-note {
+            margin-top:
+                17px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ====================================================== */
+
+        .section {
+            width:
+                min(
+                    var(--max-width),
+                    calc(100% - 40px)
+                );
+
+            margin:
+                auto;
+
+            padding:
+                120px 0;
+        }
+
+        .section-heading {
+            max-width:
+                700px;
+
+            margin-bottom:
+                50px;
+        }
+
+        .section-label {
+            color:
+                var(--accent-light);
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                0.16em;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                13px;
+        }
+
+        .section-title {
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    34px,
+                    5vw,
+                    58px
+                );
+
+            letter-spacing:
+                -0.055em;
+
+            line-height:
+                1.05;
+
+            margin-bottom:
+                17px;
+        }
+
+        .section-description {
+            color:
+                var(--text-soft);
+
+            font-size:
+                16px;
+
+            line-height:
+                1.75;
+        }
+
+
+        /* =====================================================
+           GLASS
+        ====================================================== */
+
+        .glass {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid
+                var(--glass-border);
+
+            box-shadow:
+                inset 0 1px 0
+                rgba(255,255,255,0.035),
+
+                0 25px 80px
+                rgba(0,0,0,0.2);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ====================================================== */
+
+        .features-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    minmax(0,1fr)
+                );
+
+            gap:
+                15px;
+        }
+
+        .feature-card {
+            min-height:
+                235px;
+
+            padding:
+                27px;
+
+            border-radius:
+                var(--radius);
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .feature-card::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                160px;
+
+            height:
+                160px;
+
+            top:
+                -100px;
+
+            right:
+                -80px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(34,197,94,0.12);
+
+            filter:
+                blur(40px);
+
+            transition:
+                transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform:
+                translateY(-7px);
+
+            border-color:
+                rgba(134,239,172,0.24);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.075),
+                    rgba(255,255,255,0.03)
+                );
+        }
+
+        .feature-card:hover::before {
+            transform:
+                scale(1.4);
+        }
+
+        .feature-icon {
+            width:
+                47px;
+
+            height:
+                47px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                14px;
+
+            background:
+                rgba(34,197,94,0.1);
+
+            border:
+                1px solid
+                rgba(134,239,172,0.13);
+
+            color:
+                var(--accent-light);
+
+            font-size:
+                21px;
+
+            margin-bottom:
+                25px;
+        }
+
+        .feature-card h3 {
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                20px;
+
+            margin-bottom:
+                11px;
+
+            letter-spacing:
+                -0.025em;
+        }
+
+        .feature-card p {
+            color:
+                var(--text-muted);
+
+            line-height:
+                1.7;
+
+            font-size:
+                14px;
+        }
+
+
+        /* =====================================================
+           HOW IT WORKS
+        ====================================================== */
+
+        .steps {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    4,
+                    minmax(0,1fr)
+                );
+
+            gap:
+                13px;
+        }
+
+        .step {
+            position:
+                relative;
+
+            padding:
+                27px;
+
+            min-height:
+                220px;
+
+            border-radius:
+                var(--radius);
+        }
+
+        .step-number {
+            color:
+                rgba(134,239,172,0.38);
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                45px;
+
+            font-weight:
+                700;
+
+            line-height:
+                1;
+
+            margin-bottom:
+                28px;
+        }
+
+        .step h3 {
+            font-size:
+                18px;
+
+            margin-bottom:
+                10px;
+        }
+
+        .step p {
+            color:
+                var(--text-muted);
+
+            font-size:
+                14px;
+
+            line-height:
+                1.65;
+        }
+
+
+        /* =====================================================
+           PREVIEW
+        ====================================================== */
+
+        .preview-shell {
+            padding:
+                14px;
+
+            border-radius:
+                28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.018)
+                );
+
+            border:
+                1px solid
+                rgba(134,239,172,0.12);
+
+            box-shadow:
+                0 30px 100px
+                rgba(0,0,0,0.25);
+        }
+
+        .preview-grid {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    minmax(0,1fr)
+                );
+
+            gap:
+                14px;
+        }
+
+        .preview-card {
+            min-height:
+                430px;
+
+            border-radius:
+                21px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            background:
+                radial-gradient(
+                    circle at 50% 30%,
+                    rgba(34,197,94,0.13),
+                    transparent 40%
+                ),
+                rgba(0,0,0,0.2);
+        }
+
+        .preview-card::after {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    transparent 30%,
+                    rgba(255,255,255,0.025) 50%,
+                    transparent 70%
+                );
+
+            transform:
+                translateX(-100%);
+
+            animation:
+                shine 5s infinite;
+        }
+
+        @keyframes shine {
+
+            0%,
+            45% {
+                transform:
+                    translateX(-100%);
+            }
+
+            65%,
+            100% {
+                transform:
+                    translateX(100%);
+            }
+        }
+
+        .preview-placeholder {
+            text-align:
+                center;
+
+            color:
+                var(--text-muted);
+
+            z-index:
+                1;
+        }
+
+        .preview-placeholder-icon {
+            font-size:
+                42px;
+
+            margin-bottom:
+                15px;
+
+            opacity:
+                0.55;
+        }
+
+        .preview-placeholder strong {
+            display:
+                block;
+
+            color:
+                var(--text-soft);
+
+            font-size:
+                15px;
+
+            margin-bottom:
+                6px;
+        }
+
+        .preview-placeholder span {
+            font-size:
+                12px;
+        }
+
+
+        /* =====================================================
+           PUBLISH
+        ====================================================== */
+
+        .publish-card {
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            padding:
+                60px;
+
+            border-radius:
+                30px;
+
+            text-align:
+                center;
+        }
+
+        .publish-card::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                450px;
+
+            height:
+                450px;
+
+            top:
+                -300px;
+
+            left:
+                50%;
+
+            transform:
+                translateX(-50%);
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(34,197,94,0.12);
+
+            filter:
+                blur(80px);
+
+            pointer-events:
+                none;
+        }
+
+        .publish-content {
+            position:
+                relative;
+
+            max-width:
+                700px;
+
+            margin:
+                auto;
+        }
+
+        .publish-icon {
+            width:
+                70px;
+
+            height:
+                70px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            margin:
+                0 auto 24px;
+
+            border-radius:
+                21px;
+
+            background:
+                rgba(34,197,94,0.1);
+
+            border:
+                1px solid
+                rgba(134,239,172,0.14);
+
+            color:
+                var(--accent-light);
+
+            font-size:
+                29px;
+        }
+
+        .publish-card h2 {
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-size:
+                clamp(
+                    35px,
+                    5vw,
+                    58px
+                );
+
+            letter-spacing:
+                -0.055em;
+
+            margin-bottom:
+                18px;
+        }
+
+        .publish-card p {
+            color:
+                var(--text-soft);
+
+            line-height:
+                1.75;
+
+            max-width:
+                620px;
+
+            margin:
+                auto;
+        }
+
+        .publish-actions {
+            margin-top:
+                29px;
+        }
+
+        .coming-note {
+            margin-top:
+                14px;
+
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+
+        footer {
+            width:
+                min(
+                    var(--max-width),
+                    calc(100% - 40px)
+                );
+
+            margin:
+                auto;
+
+            padding:
+                35px 0 45px;
+
+            border-top:
+                1px solid
+                rgba(134,239,172,0.08);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+        }
+
+        .footer-brand {
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            font-family:
+                "Space Grotesk",
+                sans-serif;
+
+            font-weight:
+                700;
+        }
+
+        .footer-logo {
+            width:
+                27px;
+
+            height:
+                27px;
+
+            border-radius:
+                8px;
+
+            object-fit:
+                cover;
+        }
+
+        .footer-copy {
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+        }
+
+        .footer-links {
+            display:
+                flex;
+
+            gap:
+                18px;
+        }
+
+        .footer-links a {
+            color:
+                var(--text-muted);
+
+            font-size:
+                12px;
+
+            transition:
+                color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color:
+                var(--accent-light);
+        }
+
+
+        /* =====================================================
+           REVEAL
+        ====================================================== */
+
+        .reveal {
+            opacity:
+                0;
+
+            transform:
+                translateY(25px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity:
+                1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 900px) {
+
+            .features-grid {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+            }
+
+            .steps {
+                grid-template-columns:
+                    repeat(
+                        2,
+                        minmax(0,1fr)
+                    );
+            }
+
+            .preview-card {
+                min-height:
+                    360px;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 768px) {
+
+            .nav-container {
+                height:
+                    68px;
+            }
+
+            .brand {
+                left:
+                    50%;
+
+                top:
+                    50%;
+
+                transform:
+                    translate(
+                        -50%,
+                        -50%
+                    );
+            }
+
+            .brand:hover {
+                transform:
+                    translate(
+                        -50%,
+                        -50%
+                    )
+                    scale(1.02);
+            }
+
+            .brand-logo {
+                width:
+                    34px;
+
+                height:
+                    34px;
+            }
+
+            .brand-text {
+                font-size:
+                    15px;
+            }
+
+            .mobile-toggle {
+                display:
+                    flex;
+
+                position:
+                    relative;
+
+                z-index:
+                    2;
+            }
+
+            .nav-links {
+                position:
+                    absolute;
+
+                top:
+                    76px;
+
+                left:
+                    20px;
+
+                right:
+                    20px;
+
+                display:
+                    none;
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+
+                padding:
+                    10px;
+
+                margin-left:
+                    0;
+
+                border:
+                    1px solid
+                    rgba(134,239,172,0.12);
+
+                border-radius:
+                    18px;
+
+                background:
+                    rgba(2,11,6,0.92);
+
+                backdrop-filter:
+                    blur(24px);
+
+                -webkit-backdrop-filter:
+                    blur(24px);
+
+                box-shadow:
+                    0 25px 70px
+                    rgba(0,0,0,0.4);
+            }
+
+            .nav-links.open {
+                display:
+                    flex;
+            }
+
+            .nav-links a {
+                padding:
+                    13px;
+            }
+
+            .hero {
+                min-height:
+                    900px;
+
+                padding-top:
+                    100px;
+            }
+
+            .hero-logo {
+                width:
+                    94px;
+
+                height:
+                    94px;
+
+                border-radius:
+                    24px;
+            }
+
+            .hero-description {
+                font-size:
+                    15px;
+            }
+
+            .section {
+                padding:
+                    90px 0;
+            }
+
+            .features-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .steps {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .preview-grid {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .preview-card {
+                min-height:
+                    400px;
+            }
+
+            .publish-card {
+                padding:
+                    40px 24px;
+            }
+
+            footer {
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 480px) {
+
+            .nav-container {
+                width:
+                    calc(100% - 28px);
+            }
+
+            .section,
+            .hero,
+            footer {
+                width:
+                    calc(100% - 28px);
+            }
+
+            .hero h1 {
+                font-size:
+                    48px;
+            }
+
+            .hero-actions {
+                flex-direction:
+                    column;
+            }
+
+            .hero-actions .btn {
+                width:
+                    100%;
+            }
+
+            .preview-card {
+                min-height:
+                    330px;
+            }
+        }
+
+
+        /* =====================================================
+           TOUCH DEVICES
+        ====================================================== */
+
+        @media (pointer: coarse) {
+
+            .cursor-glow {
+                display:
+                    none;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <canvas id="particles"></canvas>
+
+    <div class="background-glow"></div>
+
+    <div
+        class="cursor-glow"
+        id="cursorGlow"
+    ></div>
+
+    <!-- PREMIUM TOP PROGRESS -->
+    <div
+        class="progress"
+        id="progress"
+    ></div>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+
+            <!-- CENTERED BRAND -->
+
+            <a
+                href="#home"
+                class="brand"
+            >
+
+                <img
+                    class="brand-logo"
+                    src="https://raw.githubusercontent.com/Bexboy/BMS/main/Untitled%20-%2030%20July%202026%20at%2021.53.38.png"
+                    alt="BEX Mods Store logo"
+                >
+
+                <div class="brand-text">
+                    BEX <span>Mods Store</span>
+                </div>
+
+            </a>
+
+
+            <!-- MOBILE BUTTON -->
+
+            <button
+                class="mobile-toggle"
+                id="mobileToggle"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                type="button"
+            >
+                ☰
+            </button>
+
+
+            <!-- NAVIGATION -->
+
+            <nav
+                class="nav-links"
+                id="navLinks"
+            >
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#how-it-works">
+                    How It Works
+                </a>
+
+                <a href="#features">
+                    Features
+                </a>
+
+                <a href="#preview">
+                    Preview
+                </a>
+
+                <a href="#publish">
+                    Publish App
+                </a>
+
+                <a
+                    class="github-link"
+                    href="https://github.com/Bexboy/BMS"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub ↗
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section
+            class="hero"
+            id="home"
+        >
+
+            <div
+                class="hero-content reveal"
+            >
+
+                <div class="hero-badge">
+
+                    <span class="badge-dot"></span>
+
+                    BMS STORE • COMING SOON
+
+                </div>
+
+
+                <img
+                    class="hero-logo"
+                    src="https://raw.githubusercontent.com/Bexboy/BMS/main/Untitled%20-%2030%20July%202026%20at%2021.53.38.png"
+                    alt="BEX Mods Store"
+                >
+
+
+                <h1>
+
+                    <span>
+                        Discover.
+                    </span>
+
+                    <span>
+                        Download.
+                    </span>
+
+                    <span>
+                        Explore.
+                    </span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    BEX Mods Store is a modern Android
+                    app marketplace built to make
+                    discovering, downloading, and
+                    sharing apps simple, fast, and free.
+
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a
+                        class="btn btn-primary"
+                        href="#how-it-works"
+                    >
+                        Explore BMS
+
+                        <span>
+                            ↓
+                        </span>
+                    </a>
+
+
+                    <a
+                        class="btn btn-secondary"
+                        href="#publish"
+                    >
+                        Publish Your App
+
+                        <span>
+                            ↗
+                        </span>
+                    </a>
+
+                </div>
+
+
+                <p class="hero-note">
+                    Version 1.0 • In Development
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             HOW IT WORKS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="how-it-works"
+        >
+
+            <div
+                class="section-heading reveal"
+            >
+
+                <div class="section-label">
+                    How it works
+                </div>
+
+                <h2 class="section-title">
+                    Simple from discovery to download.
+                </h2>
+
+                <p class="section-description">
+
+                    BMS is designed around a
+                    straightforward experience.
+                    Find an app, learn about it,
+                    download it, and install it.
+
+                </p>
+
+            </div>
+
+
+            <div class="steps">
+
+
+                <article
+                    class="step glass reveal"
+                >
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Discover
+                    </h3>
+
+                    <p>
+                        Browse a growing collection
+                        of Android apps and discover
+                        something new.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="step glass reveal"
+                >
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Choose
+                    </h3>
+
+                    <p>
+                        Explore app information and
+                        decide what you want to install.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="step glass reveal"
+                >
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        Download
+                    </h3>
+
+                    <p>
+                        Download available APK files
+                        through the BMS experience.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="step glass reveal"
+                >
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Install
+                    </h3>
+
+                    <p>
+                        Install your downloaded Android
+                        application directly on your device.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FEATURES
+        ================================================== -->
+
+        <section
+            class="section"
+            id="features"
+        >
+
+            <div
+                class="section-heading reveal"
+            >
+
+                <div class="section-label">
+                    Features
+                </div>
+
+                <h2 class="section-title">
+                    Built for a better Android app experience.
+                </h2>
+
+                <p class="section-description">
+
+                    Everything about BMS is focused
+                    on making app discovery feel modern,
+                    lightweight, and easy to use.
+
+                </p>
+
+            </div>
+
+
+            <div class="features-grid">
+
+
+                <article
+                    class="feature-card glass reveal"
+                >
+
+                    <div class="feature-icon">
+                        ✓
+                    </div>
+
+                    <h3>
+                        Reviewed Downloads
+                    </h3>
+
+                    <p>
+                        Apps can be reviewed before
+                        publication to help keep the
+                        store organized and trustworthy.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="feature-card glass reveal"
+                >
+
+                    <div class="feature-icon">
+                        ⚡
+                    </div>
+
+                    <h3>
+                        Fast Experience
+                    </h3>
+
+                    <p>
+                        A lightweight interface designed
+                        to help you find what you need
+                        without unnecessary clutter.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="feature-card glass reveal"
+                >
+
+                    <div class="feature-icon">
+                        ◈
+                    </div>
+
+                    <h3>
+                        Discover Apps
+                    </h3>
+
+                    <p>
+                        Explore different applications
+                        and discover new projects from
+                        developers and creators.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="feature-card glass reveal"
+                >
+
+                    <div class="feature-icon">
+                        ◎
+                    </div>
+
+                    <h3>
+                        Community Driven
+                    </h3>
+
+                    <p>
+                        Developers and users can help
+                        grow the BMS ecosystem by sharing
+                        useful Android apps.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="feature-card glass reveal"
+                >
+
+                    <div class="feature-icon">
+                        +
+                    </div>
+
+                    <h3>
+                        Growing Library
+                    </h3>
+
+                    <p>
+                        The library is designed to grow
+                        over time as more applications
+                        become available.
+                    </p>
+
+                </article>
+
+
+                <article
+                    class="feature-card glass reveal"
+                >
+
+                    <div class="feature-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        Modern Interface
+                    </h3>
+
+                    <p>
+                        A clean, futuristic interface
+                        with a premium glass-inspired
+                        visual experience.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PREVIEW
+        ================================================== -->
+
+        <section
+            class="section"
+            id="preview"
+        >
+
+            <div
+                class="section-heading reveal"
+            >
+
+                <div class="section-label">
+                    Preview
+                </div>
+
+                <h2 class="section-title">
+                    A first look at BMS.
+                </h2>
+
+                <p class="section-description">
+
+                    The BEX Mods Store experience is
+                    currently in development. More
+                    screenshots will appear here as
+                    the project evolves.
+
+                </p>
+
+            </div>
+
+
+            <div
+                class="preview-shell reveal"
+            >
+
+                <div class="preview-grid">
+
+
+                    <div class="preview-card">
+
+                        <div class="preview-placeholder">
+
+                            <div class="preview-placeholder-icon">
+                                ◫
+                            </div>
+
+                            <strong>
+                                BMS Store Preview
+                            </strong>
+
+                            <span>
+                                Screenshot coming soon
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="preview-card">
+
+                        <div class="preview-placeholder">
+
+                            <div class="preview-placeholder-icon">
+                                ◩
+                            </div>
+
+                            <strong>
+                                App Discovery Preview
+                            </strong>
+
+                            <span>
+                                Screenshot coming soon
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             PUBLISH
+        ================================================== -->
+
+        <section
+            class="section"
+            id="publish"
+        >
+
+            <div
+                class="publish-card glass reveal"
+            >
+
+                <div class="publish-content">
+
+
+                    <div class="publish-icon">
+                        ↑
+                    </div>
+
+
+                    <h2>
+                        Publish Your Android App.
+                    </h2>
+
+
+                    <p>
+
+                        Have an Android app?
+                        Submit your APK completely free
+                        and help grow the BEX Mods Store
+                        library. Every submission can be
+                        reviewed before being published.
+
+                    </p>
+
+
+                    <div class="publish-actions">
+
+                        <button
+                            class="btn btn-primary"
+                            id="submitButton"
+                            type="button"
+                        >
+
+                            Submit Your App
+
+                            <span>
+                                ↗
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <p class="coming-note">
+                        Submission system coming soon.
+                    </p>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+
+        <div class="footer-brand">
+
+            <img
+                class="footer-logo"
+                src="https://raw.githubusercontent.com/Bexboy/BMS/main/Untitled%20-%2030%20July%202026%20at%2021.53.38.png"
+                alt="BMS"
+            >
+
+            <span>
+                BEX Mods Store
+            </span>
+
+        </div>
+
+
+        <div class="footer-copy">
+
+            © 2026 BEX Mods Store.
+            Built for Android.
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a
+                href="https://github.com/Bexboy/BMS"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                GitHub
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           CURSOR GLOW
+        ====================================================== */
+
+        const cursorGlow =
+            document.getElementById(
+                "cursorGlow"
+            );
+
+
+        document.addEventListener(
+            "mousemove",
+            (event) => {
+
+                cursorGlow.style.left =
+                    event.clientX + "px";
+
+                cursorGlow.style.top =
+                    event.clientY + "px";
+
+            }
+        );
+
+
+        /* =====================================================
+           SCROLL PROGRESS
+        ====================================================== */
+
+        const progress =
+            document.getElementById(
+                "progress"
+            );
+
+
+        function updateProgress() {
+
+            const scrollTop =
+                window.scrollY;
+
+            const scrollHeight =
+                document.documentElement
+                    .scrollHeight -
+                window.innerHeight;
+
+
+            const percentage =
+                scrollHeight > 0
+                    ? (
+                        scrollTop /
+                        scrollHeight
+                    ) * 100
+                    : 0;
+
+
+            progress.style.width =
+                percentage + "%";
+
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            updateProgress,
+            {
+                passive: true
+            }
+        );
+
+
+        updateProgress();
+
+
+        /* =====================================================
+           MOBILE MENU
+        ====================================================== */
+
+        const mobileToggle =
+            document.getElementById(
+                "mobileToggle"
+            );
+
+
+        const navLinks =
+            document.getElementById(
+                "navLinks"
+            );
+
+
+        mobileToggle.addEventListener(
+            "click",
+            () => {
+
+                const isOpen =
+                    navLinks.classList.toggle(
+                        "open"
+                    );
+
+
+                mobileToggle.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                );
+
+
+                mobileToggle.textContent =
+                    isOpen
+                        ? "×"
+                        : "☰";
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                ".nav-links a"
+            )
+            .forEach(
+                (link) => {
+
+                    link.addEventListener(
+                        "click",
+                        () => {
+
+                            navLinks.classList
+                                .remove("open");
+
+
+                            mobileToggle
+                                .setAttribute(
+                                    "aria-expanded",
+                                    "false"
+                                );
+
+
+                            mobileToggle.textContent =
+                                "☰";
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =====================================================
+           REVEAL ON SCROLL
+        ====================================================== */
+
+        const revealElements =
+            document.querySelectorAll(
+                ".reveal"
+            );
+
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target
+                                    .classList
+                                    .add(
+                                        "visible"
+                                    );
+
+
+                                revealObserver
+                                    .unobserve(
+                                        entry.target
+                                    );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold:
+                        0.12
+                }
+            );
+
+
+        revealElements.forEach(
+            (element) => {
+
+                revealObserver.observe(
+                    element
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           SUBMISSION BUTTON
+        ====================================================== */
+
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+
+
+        submitButton.addEventListener(
+            "click",
+            () => {
+
+                alert(
+                    "The BMS submission system is coming soon! 🚀"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           PARTICLE SYSTEM
+        ====================================================== */
+
+        const canvas =
+            document.getElementById(
+                "particles"
+            );
+
+
+        const ctx =
+            canvas.getContext(
+                "2d"
+            );
+
+
+        let particles = [];
+
+
+        let mouse = {
+            x: null,
+            y: null
+        };
+
+
+        /* =====================================================
+           RESIZE CANVAS
+        ====================================================== */
+
+        function resizeCanvas() {
+
+            const pixelRatio =
+                Math.min(
+                    window.devicePixelRatio ||
+                    1,
+                    2
+                );
+
+
+            canvas.width =
+                window.innerWidth *
+                pixelRatio;
+
+
+            canvas.height =
+                window.innerHeight *
+                pixelRatio;
+
+
+            canvas.style.width =
+                window.innerWidth +
+                "px";
+
+
+            canvas.style.height =
+                window.innerHeight +
+                "px";
+
+
+            ctx.setTransform(
+                pixelRatio,
+                0,
+                0,
+                pixelRatio,
+                0,
+                0
+            );
+
+
+            createParticles();
+
+        }
+
+
+        /* =====================================================
+           CREATE PARTICLES
+        ====================================================== */
+
+        function createParticles() {
+
+            particles = [];
+
+
+            const density =
+                window.innerWidth < 700
+                    ? 42
+                    : 85;
+
+
+            for (
+                let i = 0;
+                i < density;
+                i++
+            ) {
+
+                particles.push({
+
+                    x:
+                        Math.random() *
+                        window.innerWidth,
+
+                    y:
+                        Math.random() *
+                        window.innerHeight,
+
+                    vx:
+                        (
+                            Math.random() -
+                            0.5
+                        ) * 0.18,
+
+                    vy:
+                        (
+                            Math.random() -
+                            0.5
+                        ) * 0.18,
+
+                    radius:
+                        Math.random() *
+                        1.45 +
+                        0.35,
+
+                    opacity:
+                        Math.random() *
+                        0.4 +
+                        0.12
+
+                });
+
+            }
+
+        }
+
+
+        /* =====================================================
+           DRAW PARTICLES
+        ====================================================== */
+
+        function drawParticles() {
+
+            ctx.clearRect(
+                0,
+                0,
+                window.innerWidth,
+                window.innerHeight
+            );
+
+
+            for (
+                let i = 0;
+                i < particles.length;
+                i++
+            ) {
+
+                const particle =
+                    particles[i];
+
+
+                particle.x +=
+                    particle.vx;
+
+
+                particle.y +=
+                    particle.vy;
+
+
+                if (
+                    particle.x < -20 ||
+                    particle.x >
+                    window.innerWidth + 20
+                ) {
+
+                    particle.vx *= -1;
+
+                }
+
+
+                if (
+                    particle.y < -20 ||
+                    particle.y >
+                    window.innerHeight + 20
+                ) {
+
+                    particle.vy *= -1;
+
+                }
+
+
+                /* Mouse interaction */
+
+                if (
+                    mouse.x !== null &&
+                    mouse.y !== null
+                ) {
+
+                    const dx =
+                        particle.x -
+                        mouse.x;
+
+
+                    const dy =
+                        particle.y -
+                        mouse.y;
+
+
+                    const distance =
+                        Math.sqrt(
+                            dx * dx +
+                            dy * dy
+                        );
+
+
+                    const interactionRadius =
+                        130;
+
+
+                    if (
+                        distance <
+                        interactionRadius
+                    ) {
+
+                        const force =
+                            (
+                                interactionRadius -
+                                distance
+                            ) /
+                            interactionRadius;
+
+
+                        particle.x +=
+                            (
+                                dx /
+                                (distance || 1)
+                            ) *
+                            force *
+                            0.35;
+
+
+                        particle.y +=
+                            (
+                                dy /
+                                (distance || 1)
+                            ) *
+                            force *
+                            0.35;
+
+                    }
+
+                }
+
+
+                ctx.beginPath();
+
+
+                ctx.arc(
+                    particle.x,
+                    particle.y,
+                    particle.radius,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fillStyle =
+                    `rgba(
+                        134,
+                        239,
+                        172,
+                        ${particle.opacity}
+                    )`;
+
+
+                ctx.fill();
+
+            }
+
+
+            /* =================================================
+               CONNECTIONS
+            ================================================== */
+
+            for (
+                let i = 0;
+                i < particles.length;
+                i++
+            ) {
+
+                for (
+                    let j = i + 1;
+                    j < particles.length;
+                    j++
+                ) {
+
+                    const a =
+                        particles[i];
+
+
+                    const b =
+                        particles[j];
+
+
+                    const dx =
+                        a.x - b.x;
+
+
+                    const dy =
+                        a.y - b.y;
+
+
+                    const distance =
+                        Math.sqrt(
+                            dx * dx +
+                            dy * dy
+                        );
+
+
+                    if (
+                        distance < 105
+                    ) {
+
+                        const opacity =
+                            (
+                                1 -
+                                distance / 105
+                            ) *
+                            0.09;
+
+
+                        ctx.beginPath();
+
+
+                        ctx.moveTo(
+                            a.x,
+                            a.y
+                        );
+
+
+                        ctx.lineTo(
+                            b.x,
+                            b.y
+                        );
+
+
+                        ctx.strokeStyle =
+                            `rgba(
+                                74,
+                                222,
+                                128,
+                                ${opacity}
+                            )`;
+
+
+                        ctx.lineWidth =
+                            0.6;
+
+
+                        ctx.stroke();
+
+                    }
+
+                }
+
+            }
+
+
+            requestAnimationFrame(
+                drawParticles
+            );
+
+        }
+
+
+        /* =====================================================
+           MOUSE TRACKING
+        ====================================================== */
+
+        window.addEventListener(
+            "mousemove",
+            (event) => {
+
+                mouse.x =
+                    event.clientX;
+
+                mouse.y =
+                    event.clientY;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        window.addEventListener(
+            "mouseleave",
+            () => {
+
+                mouse.x = null;
+
+                mouse.y = null;
+
+            }
+        );
+
+
+        /* =====================================================
+           WINDOW RESIZE
+        ====================================================== */
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+
+        /* =====================================================
+           START
+        ====================================================== */
+
+        resizeCanvas();
+
+        drawParticles();
+
+    </script>
+
+</body>
+</html>
